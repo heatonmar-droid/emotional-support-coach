@@ -1,0 +1,10 @@
+# Production-observed direct dependencies / 生产实测的直接依赖版本
+fastapi==0.141.1
+uvicorn==0.52.1
+psycopg[binary]==3.3.4
+langchain-core==1.5.3
+json-repair==0.61.7
+openai==3.10.0
+mem0ai==2.0.20
+qdrant-client==1.19.0
+python-dotenv==1.2.2

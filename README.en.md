@@ -38,6 +38,8 @@ This repository contains backend code. You supply the frontend, full identity pl
 Requires Python 3.12 or newer, an empty PostgreSQL database, and your own model-service credentials. Run these commands in this directory.
 
 ```bash
+git clone https://github.com/heatonmar-droid/emotional-support-coach.git
+cd emotional-support-coach
 python -m venv .venv
 .venv/bin/python -m pip install -r requirements.txt
 cp .env.example .env
@@ -130,6 +132,12 @@ Profile memory is stored in PostgreSQL. Episodic memory uses Mem0 OSS / Qdrant, 
 For database integration checks, also set `TEST_DATABASE_URL` to a dedicated local test database. Tests create and remove an isolated schema. Never use a real-user database. Without that variable, database checks are explicitly skipped. All bundled tests use synthetic content and model doubles, with no paid model calls. Mem0/Qdrant checks use actual local storage with synthetic embeddings.
 
 See [validation results and limitations](docs/VALIDATION.md). English prompt files are complete reference translations, not a validated English support product; see [prompt notes](prompts/README.md).
+
+## Contribute
+
+[Report a problem](https://github.com/heatonmar-droid/emotional-support-coach/issues/new/choose) or fork the repository and open a PR. Setup notes, English proofreading, fictional regression cases, and method cards are welcome. See the [contribution guide](CONTRIBUTING.md); maintainers review merges.
+
+On your first run, check `http://127.0.0.1:5101/health` from another terminal, then call the chat endpoint with your newly created account token. Health only confirms startup, not a successful model call; chat must reach `workflow_end`. For a 401, check the account token. For model-access or model-name errors, check your provider account and model configuration. Never include secrets, full configuration, or real user content in reports.
 
 ## License
 

@@ -1,5 +1,9 @@
 .env.example
+.github/ISSUE_TEMPLATE/bug_report.md
+.github/ISSUE_TEMPLATE/idea.md
+.github/pull_request_template.md
 .gitignore
+CONTRIBUTING.md
 LICENSE
 README.en.md
 README.md

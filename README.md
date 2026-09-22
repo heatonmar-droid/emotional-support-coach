@@ -38,6 +38,8 @@
 需要 Python 3.12 或更新版本、一个空的 PostgreSQL 数据库，以及使用者自己的模型服务凭证。以下命令在本目录运行。
 
 ```powershell
+git clone https://github.com/heatonmar-droid/emotional-support-coach.git
+cd emotional-support-coach
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 Copy-Item .env.example .env
@@ -129,6 +131,12 @@ SSE 顺序为 `workflow_start` → `step` → `workflow_end`，失败时以 `err
 数据库集成检查需要另外设置 `TEST_DATABASE_URL`，指向专门的本机测试数据库。测试会创建并清理独立 schema；不要使用真实用户数据库。未设置时会明确跳过数据库检查。所有随包测试只使用合成内容和模型替身，不调用付费模型；Mem0/Qdrant 存储检查使用真实本地实现和替身 embedding。
 
 当前检查结果与未验证项见 [验证记录](docs/VALIDATION.md)。英文提示词是完整对照译文，不等于已验证的英语服务；见 [提示词说明](prompts/README.md)。
+
+## 一起改进
+
+欢迎 [反馈问题](https://github.com/heatonmar-droid/emotional-support-coach/issues/new/choose) 或 Fork 后提交 PR。安装说明、英文校对、虚构回归案例和方法卡都欢迎贡献。具体步骤见 [贡献指南](CONTRIBUTING.md)，合并由维护者审核。
+
+第一次运行时，先在另一终端访问 `http://127.0.0.1:5101/health`，再用新建账号令牌调用聊天接口。健康检查通过只说明服务启动，不代表模型调用成功；聊天需收到 `workflow_end`。遇到 401，检查账号令牌；遇到模型权限或名称错误，核对自己的供应商账号与模型配置。反馈时不要贴密钥、完整配置或真实用户内容。
 
 ## 许可
 

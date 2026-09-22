@@ -72,9 +72,9 @@ def _mem0_oss_memory():
             raise RuntimeError("MEM0_OSS_DATA_DIR must be an absolute path")
         data_dir = Path(raw_dir)
         data_dir.mkdir(parents=True, exist_ok=True)
-        api_key = os.getenv("SILICONFLOW_API_KEY", "").strip()
+        api_key = os.getenv("EMBEDDING_API_KEY", "").strip()
         if not api_key:
-            raise RuntimeError("SILICONFLOW_API_KEY is required for Mem0 OSS")
+            raise RuntimeError("EMBEDDING_API_KEY is required for Mem0 OSS")
         os.environ["MEM0_TELEMETRY"] = "false"
         os.environ["MEM0_DIR"] = str(data_dir / ".mem0")
         from mem0 import Memory
@@ -97,9 +97,9 @@ def _mem0_oss_memory():
                 "embedder": {
                     "provider": "openai",
                     "config": {
-                        "model": "BAAI/bge-m3",
+                        "model": os.environ["EMBEDDING_MODEL"],
                         "api_key": api_key,
-                        "openai_base_url": "https://api.siliconflow.cn/v1",
+                        "openai_base_url": os.environ["EMBEDDING_BASE_URL"],
                     },
                 },
                 "history_db_path": str(data_dir / "history.db"),

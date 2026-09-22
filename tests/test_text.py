@@ -189,7 +189,9 @@ class UnitChecks(unittest.TestCase):
                         os.environ,
                         {
                             "MEM0_OSS_DATA_DIR": directory,
-                            "SILICONFLOW_API_KEY": "offline-test-value",
+                            "EMBEDDING_API_KEY": "offline-test-value",
+                            "EMBEDDING_BASE_URL": "http://127.0.0.1:9/v1",
+                            "EMBEDDING_MODEL": "synthetic-embedding",
                             "MEM0_OSS_QDRANT_HOST": "",
                         },
                     ),

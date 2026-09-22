@@ -23,9 +23,9 @@ python manage.py init-db
 python manage.py import-cards --file knowledge/method-cards.zh-CN.json
 ```
 
-导入按 16 张一批调用 BGE-M3，会产生供应商费用。重新导入相同 ID 会更新已有卡片；重启 API 后加载。库为空时不会检索方法卡。导入这 68 张卡不会自动启用书籍或其他实验语料。
+导入按 16 张一批调用配置的 embedding 服务，会产生供应商费用。重新导入相同 ID 会更新已有卡片；重启 API 后加载。库为空时不会检索方法卡。导入这 68 张卡不会自动启用书籍或其他实验语料。
 
-Import calls BGE-M3 in batches of 16 and incurs provider charges. Reimporting the same IDs updates existing cards; restart the API to load them. An empty table disables card retrieval. Importing these 68 cards does not enable books or other experimental corpora.
+Import calls the configured embedding provider in batches of 16 and incurs provider charges. Reimporting the same IDs updates existing cards; restart the API to load them. An empty table disables card retrieval. Importing these 68 cards does not enable books or other experimental corpora.
 
 知识正文保留原中文，以免翻译改变检索和练习含义；本页、字段说明和接入文档提供中英对照。英文主提示词另见 [prompts](../prompts/README.md)。
 

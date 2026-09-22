@@ -8,6 +8,10 @@ Status: **The local checks below are complete. Publishing source code does not e
 
 ## 已完成 / Completed
 
+2026-09-22 配置更新：移除部署专用的模型 ID，加入按角色配置的兼容端点；embedding 模型与端点由环境变量提供。11 项检查中 10 项通过，数据库集成项本次未配置测试库而跳过。新增测试核对自定义模型与端点传递，未调用真实模型。
+
+Configuration update, 2026-09-22: deployment-specific model IDs removed, role-based compatible endpoints added, and embedding model/endpoint supplied through environment variables. Ten of eleven checks passed; database integration was skipped without a configured test database. The new test checks custom model and endpoint forwarding; no live models were called.
+
 - 两套主提示词采用通用身份，英文与中文版本同步；来源标识及原始文件指纹不包含在公开包中。
   Both main prompts use a generic identity consistently in Chinese and English; source identifiers and original-file fingerprints are excluded from the public package.
 - 在全新 Python 3.13 虚拟环境安装固定版本的直接依赖；`pip check` 无冲突。

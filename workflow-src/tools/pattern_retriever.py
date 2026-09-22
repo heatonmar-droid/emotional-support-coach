@@ -12,16 +12,16 @@ from storage.database.db import get_db_url
 
 class PatternRetriever:
     def _embed_texts(self, texts):
-        key = os.environ.get("SILICONFLOW_API_KEY", "").strip()
+        key = os.environ.get("EMBEDDING_API_KEY", "").strip()
         if not key:
-            raise RuntimeError("Set SILICONFLOW_API_KEY")
+            raise RuntimeError("Set EMBEDDING_API_KEY")
         with OpenAI(
             api_key=key,
-            base_url="https://api.siliconflow.cn/v1",
+            base_url=os.environ["EMBEDDING_BASE_URL"],
             timeout=12,
             max_retries=0,
         ) as client:
-            response = client.embeddings.create(model="BAAI/bge-m3", input=texts)
+            response = client.embeddings.create(model=os.environ["EMBEDDING_MODEL"], input=texts)
         return [
             item.embedding
             for item in sorted(response.data, key=lambda item: item.index)

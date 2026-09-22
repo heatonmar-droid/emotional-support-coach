@@ -30,17 +30,15 @@ flowchart TD
 
 Safety assessment and draft generation remain parallel. Non-support routes select safety replies and suppress ordinary memory writes for that turn. Active safety state, exact-quote checks, cross-session corrections, and rules for using retrieved memory are derived from production. The two main modes differ in their main system prompts; account mode is read from the database each turn.
 
-| 角色 / Role | 快照配置 / Snapshot configuration |
+| 角色 / Role | 配置 / Configuration |
 |---|---|
-| 主回复 / Main reply | `openrouter` · `anthropic/claude-sonnet-5` |
-| 安全判断 / Safety assessment | `deepseek` · `deepseek-v4-flash` |
-| 后台记忆提取 / Background memory extraction | `ark` · `doubao-seed-2-1-turbo-260628` |
-| Embedding | SiliconFlow · `BAAI/bge-m3`, 1024 dimensions |
-| 事件存储 / Episodic storage | Mem0 OSS + Qdrant, `infer=False` |
+| 回复 / Reply | `claude_canary`：自行填写模型 ID / Supply your model ID |
+| 安全判断 / Safety | `safety_assessor`：自行填写模型 ID / Supply your model ID |
+| 记忆提取 / Memory | `memory_extractor`：自行填写模型 ID / Supply your model ID |
 
-这些标识忠实保留快照的配置，不保证公开服务账号均有权限。供应商适配层改为通用公开端点，由使用者填入自己的凭证；本次没有用真实模型完成端到端验证。
+聊天模型使用 OpenAI 兼容接口，并需满足结构化输出要求。不同角色可以配置同一个模型，也可以分别选择。更换模型后请验证提示词、JSON 输出及安全行为。此处不列出部署者的模型分配。
 
-These identifiers preserve the snapshot configuration, not an assurance of access for every public provider account. The transport adapter now uses public endpoints and recipient-provided credentials. Live-model end-to-end validation was not performed for this release.
+Chat models use an OpenAI-compatible interface and must meet structured-output requirements. Roles may share a model or use different models. Verify prompts, JSON output, and safety behavior after changes. Deployment-specific model assignments are not listed here.
 
 ## 开源适配改动 / Adaptation changes
 

@@ -7,6 +7,9 @@ from langchain_core.messages import AIMessage
 from openai import OpenAI
 
 PROVIDERS = {
+    "reply": ("REPLY", ""),
+    "safety": ("SAFETY", ""),
+    "memory": ("MEMORY", ""),
     "openrouter": ("OPENROUTER", "https://openrouter.ai/api/v1"),
     "deepseek": ("DEEPSEEK", "https://api.deepseek.com"),
     "ark": ("ARK", "https://ark.cn-beijing.volces.com/api/v3"),
@@ -25,18 +28,19 @@ def call_llm(
 ):
     prefix, default_url = PROVIDERS[provider]
     key = os.environ.get(f"{prefix}_API_KEY", "").strip()
-    if not key:
+    base_url = os.environ.get(f"{prefix}_BASE_URL") or default_url
+    if not key or not base_url or not model:
         raise RuntimeError(f"Set {prefix}_API_KEY / 请配置模型凭证")
     payload = {}
     if provider == "openrouter":
         payload["reasoning"] = {"effort": "none", "exclude": True}
-    else:
+    elif provider in {"deepseek", "ark"}:
         payload["thinking"] = {"type": "disabled"}
     role = {"human": "user", "ai": "assistant", "system": "system"}
     try:
         with OpenAI(
             api_key=key,
-            base_url=os.environ.get(f"{prefix}_BASE_URL") or default_url,
+            base_url=base_url,
             timeout=timeout_seconds,
             max_retries=0,
         ) as client:

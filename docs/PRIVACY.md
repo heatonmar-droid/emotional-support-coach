@@ -14,8 +14,8 @@ Scanning detects some credential and personal-data patterns, but cannot prove th
 
 | 数据 / Data | 去向 / Destination |
 |---|---|
-| 本轮消息、上下文与选中的记忆 / Message, context, selected memory | 配置的 Claude 服务；安全与记忆辅助模型按各自调用上下文接收信息。Configured Claude provider and auxiliary providers receive their respective contexts. |
-| 待检索/写入事件与方法卡文本 / Episode and method-card text | SiliconFlow embedding 服务。SiliconFlow embedding service. |
+| 本轮消息、上下文与选中的记忆 / Message, context, selected memory | 配置的回复服务；安全与记忆辅助模型按各自调用上下文接收信息。Configured reply provider and auxiliary providers receive their respective contexts. |
+| 待检索/写入事件与方法卡文本 / Episode and method-card text | 由部署者配置的 embedding 服务。The embedding provider configured by the deployer. |
 | 账号令牌哈希、模式、聊天、画像、安全状态 / Token hash, mode, chat, profile, safety state | 使用者配置的 PostgreSQL。Recipient-owned PostgreSQL. |
 | 事件原文、向量、Mem0 操作历史 / Episode text, vectors, Mem0 operation history | 使用者配置的 Qdrant 与 Mem0 本地数据目录。Recipient-configured Qdrant and Mem0 data directory. |
 

@@ -4,7 +4,7 @@
 
 A backend you can read, change, and self-host when building a psychological-support chat service.
 
-Some people want to talk through a difficult day. Others feel stuck in a relationship and want to understand what matters to them. After a longer conversation, someone may want help finding one small next step. Those conversations need different pacing. This project provides two Claude text modes, with context, memory, safety assessment, and method-card retrieval in the same request flow.
+Some people want to talk through a difficult day. Others feel stuck in a relationship and want to understand what matters to them. After a longer conversation, someone may want help finding one small next step. Those conversations need different pacing. This project provides two text conversation modes, with context, memory, safety assessment, and method-card retrieval in the same request flow.
 
 ## What you can build with it
 
@@ -18,7 +18,7 @@ Use it as the backend for a mini-program or web chat, connected to your own inte
 | A concrete exercise when it fits the conversation | Method-card retrieval; the response model decides whether to use a card |
 | A clear indication that a turn finished | SSE progress, a final reply, and explicit error events |
 
-Both modes share safety assessment and memory but use different main prompts. Claude generates the main reply. Safety assessment, memory extraction, and embeddings have separate model configurations.
+Both modes share safety assessment and memory but use different main prompts. Developers choose models by role; multiple roles may use the same model.
 
 This repository contains backend code. You supply the frontend, full identity platform, billing, and operations integrations. It has not been validated for clinical effectiveness and cannot promise diagnosis, treatment, or emergency assistance. Start by building and evaluating the conversation flow before deciding how to offer it to users.
 
@@ -50,13 +50,13 @@ On Windows PowerShell, use `.\.venv\Scripts\python.exe` and `Copy-Item .env.exam
 Edit `.env`:
 
 - `PGDATABASE_URL`: your own empty database. The code does not discover or fall back to a production database.
-- `OPENROUTER_API_KEY`: Claude response-generation credentials.
-- `DEEPSEEK_API_KEY`: semantic safety-assessment credentials.
-- `ARK_API_KEY`: asynchronous memory-extraction credentials.
-- `SILICONFLOW_API_KEY`: BGE-M3 embeddings for episodic memory and optional method cards.
+- `REPLY_API_KEY` / `REPLY_BASE_URL`: reply credentials and compatible endpoint.
+- `SAFETY_API_KEY` / `SAFETY_BASE_URL`: safety-assessment credentials and compatible endpoint.
+- `MEMORY_API_KEY` / `MEMORY_BASE_URL`: memory-extraction credentials and compatible endpoint.
+- `EMBEDDING_API_KEY`: credentials; also set `EMBEDDING_BASE_URL` and `EMBEDDING_MODEL`. The current store requires 1024-dimensional output via an OpenAI-compatible embeddings endpoint. Rebuild method-card and episodic vectors when changing models; do not mix embedding spaces.
 - `MEM0_OSS_DATA_DIR`: a writable absolute local path for Qdrant and Mem0 history, outside the Git repository.
 
-Model IDs are in `config/chat_clean_v1.json`; endpoints are in `.env`. Default IDs are taken from the production snapshot. You must verify their availability with your own provider account. No private relay service is supplied or tested here.
+Model IDs are in `config/chat_clean_v1.json`; endpoints are in `.env`. Model IDs for all three roles are blank; supply your own IDs. The chat adapter uses OpenAI-compatible Chat Completions, and models must satisfy the JSON output contract. Other protocols need an adapter; arbitrary models are not guaranteed to work unchanged. The retained mode IDs `claude` and `claude_coach` do not restrict model choice.
 
 Optional: start an independent local PostgreSQL instance with Docker. First set a newly generated `POSTGRES_PASSWORD` in `.env`, then:
 
@@ -119,7 +119,7 @@ Import the bundled cards:
 
 Importing calls your embedding provider and incurs its charges. Restart the API afterwards. Retrieval retains production ranking based on the current message and recent context; the response model decides whether to use a card.
 
-Profile memory is stored in PostgreSQL. Episodic memory uses Mem0 OSS / Qdrant, with embeddings sent to SiliconFlow. Models receive the current message and relevant context. **Self-hosting does not make the system fully offline.** Read the [privacy and deletion boundaries](docs/PRIVACY.md).
+Profile memory is stored in PostgreSQL. Episodic memory uses Mem0 OSS / Qdrant, with embeddings sent to your configured provider. Models receive the current message and relevant context. **Self-hosting does not make the system fully offline.** Read the [privacy and deletion boundaries](docs/PRIVACY.md).
 
 ## Verification
 

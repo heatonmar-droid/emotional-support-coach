@@ -1,6 +1,6 @@
 # 情绪支持与心理教练
 
-[English](README.en.md) · [提示词](prompts/README.md) · [知识库](knowledge/README.md) · [架构](docs/ARCHITECTURE.md)
+[English](README.en.md) · [参与共创](CONTRIBUTING.md) · [提示词](prompts/README.md) · [知识库](knowledge/README.md) · [架构](docs/ARCHITECTURE.md)
 
 给想做心理支持对话的人，一套可以读懂、修改和自行部署的后端。
 

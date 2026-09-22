@@ -12,6 +12,8 @@ clean_workflow_api.py
 compose.yaml
 config/chat_clean_v1.json
 docs/ARCHITECTURE.md
+docs/INTRODUCTION.en.md
+docs/INTRODUCTION.md
 docs/PRIVACY.md
 docs/RELEASE.md
 docs/VALIDATION.md

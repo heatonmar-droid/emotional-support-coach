@@ -2,9 +2,9 @@
 
 ## 范围 / Scope
 
-本项目提供独立的心理支持文字服务，包括日常支持和心理教练两种模式。公开交付仅包含代码、提示词、空配置模板、测试与文档。
+本项目提供独立的心理支持文字服务，包括日常支持和心理教练两种模式。公开交付仅包含代码、提示词、方法卡、空配置模板、测试与文档。
 
-This project provides standalone psychological-support text services in everyday-support and coaching modes. The public distribution contains only code, prompts, empty configuration templates, tests, and documentation.
+This project provides standalone psychological-support text services in everyday-support and coaching modes. The public distribution contains only code, prompts, method cards, empty configuration templates, tests, and documentation.
 
 身份服务、前端代理、计费和运维系统由部署者独立集成。公开包不提供既有部署的标识、来源文件指纹、环境信息或用户数据。
 
@@ -17,7 +17,7 @@ flowchart TD
     A[Bearer authentication / 令牌认证] --> B[Account mode and owned history / 账号模式与历史]
     B --> C[Profile, episodic memory, optional cards / 画像、事件、可选方法卡]
     C --> D[Safety assessment / 安全判断]
-    C --> E[Claude daily or coach draft / 日常或教练草稿]
+    C --> E[Daily or coach draft / 日常或教练草稿]
     D --> F[Safety route selection / 安全路由选择]
     E --> F
     F --> G[Strict reply validation and commit / 严格校验与落库]
@@ -44,7 +44,7 @@ Chat models use an OpenAI-compatible interface and must meet structured-output r
 
 | 内容 / Area | 差异 / Difference |
 |---|---|
-| 文字模式 / Modes | 仅保留 `claude`、`claude_coach`；删除旧 `production` 分支、reviewer 回复改写和模型失败回退。Only the two Claude modes remain; retired reply paths and silent fallback are removed. |
+| 文字模式 / Modes | 仅保留 `claude`、`claude_coach`；删除旧 `production` 分支、reviewer 回复改写和模型失败回退。Only the two text modes remain; retired reply paths and silent fallback are removed. |
 | 认证 / Authentication | 使用随机独立账号令牌及数据库哈希；不带生产用户、微信凭证或会话。Standalone random account tokens and hashes replace production identity integrations. |
 | API | 用受认证的独立文字接口替代业务中间件；不暴露内部安全原句、RAG 查询或记忆检索结果。Authenticated standalone endpoints replace business middleware and omit internal diagnostic payloads. |
 | 提示词 / Prompts | 原文抽成独立文件，增加单独译文；运行时语言保持原样。Original prompts are extracted into files with separate translations; runtime language is unchanged. |

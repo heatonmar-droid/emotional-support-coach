@@ -1,6 +1,6 @@
 # Emotional Support Coach
 
-[简体中文](README.md) · [Contribute](CONTRIBUTING.md) · [Prompts](prompts/README.md) · [Knowledge](knowledge/README.md) · [Architecture](docs/ARCHITECTURE.md)
+[简体中文](README.md) · [Project guide](docs/INTRODUCTION.en.md) · [Contribute](CONTRIBUTING.md) · [Prompts](prompts/README.md) · [Knowledge](knowledge/README.md) · [Architecture](docs/ARCHITECTURE.md)
 
 A backend you can read, change, and self-host when building a psychological-support chat service.
 
